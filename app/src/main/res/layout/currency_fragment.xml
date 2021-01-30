@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="vm"
+            type="com.demo.ui.viewModule.CurrencyViewModule" />
+
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.CurrencyFragment">
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/top"
+        app:entries="@{vm.currencyKey}"
+        newValue="@{vm.selectKey}"
+        onItemSelected="@{(newValue)->vm.onItemSelect(newValue)}"
+        app:layout_constraintStart_toStartOf="@id/start"
+        />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvResult"
+        style="@style/normalText.Large.Bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/spinner"
+        android:textColor="@color/purple_200"
+        app:layout_constraintBottom_toBottomOf="@id/spinner"
+        app:layout_constraintStart_toEndOf="@id/spinner"
+        app:layout_constraintEnd_toEndOf="@id/end"
+        android:text="@{vm.result}"
+        />
+
+   <com.google.android.material.textfield.TextInputLayout
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="30dp"
+       app:layout_constraintTop_toBottomOf="@id/spinner"
+       app:layout_constraintStart_toStartOf="@id/start"
+       app:layout_constraintEnd_toEndOf="@id/end"
+       app:prefixText="USD :  "
+       app:prefixTextColor="@color/purple_200"
+       android:hint="@string/enter_amount"
+       >
+       <com.google.android.material.textfield.TextInputEditText
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:maxLength="25"
+           android:inputType="numberDecimal"
+           android:text="@={vm.amount}"
+           >
+           <requestFocus/>
+       </com.google.android.material.textfield.TextInputEditText>
+
+   </com.google.android.material.textfield.TextInputLayout>
+
+
+    
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".2"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".80"
+        />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".05"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".95"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
